@@ -24,7 +24,6 @@
 #include <err.h>
 #include <error.h>
 #include <dirent.h>
-#include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/sendfile.h>
 #include <sys/types.h>
