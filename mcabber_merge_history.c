@@ -507,12 +507,13 @@ int merge_dirs
 void help(const char *prg)
 {
    fprintf(stderr,
-    "Merge mcabber history dirs\n\n"
+    "Merge mcabber history files\n\n"
     "Usage:\n"
-    "\t%s dir1 dir2 [outdir]\n"
+    "\t%s directory1 directory2 [outdir]\n"
     "\t%s file1 file2 [outfile]\n\n"
-    "If outdir our outfile are missing this program works inplace.\n"
-   ,prg,prg);
+    "If 'outdir' or 'outfile' are missing this program works inplace on the first argument,\n"
+    "meaning '%s arg1 arg2' is the same as '%s arg1 arg2 arg1'.\n"
+   ,prg,prg,prg,prg);
       
    exit(1);
 }
@@ -544,7 +545,7 @@ int main(int argc, char **argv)
       return 1;
    }
    if (source1_is_dir != S_ISDIR(statbuf.st_mode))
-      errx(1, "Both must be dir or file");
+      errx(1, "Both argumens must be of same type (directory or file)");
 
    // we got third arg
    if (argc == 4) {
@@ -555,7 +556,7 @@ int main(int argc, char **argv)
             return 1;
          }
          if (! S_ISDIR(statbuf.st_mode)) {
-            errx(1, "Dest has to be directory");
+            errx(1, "Destination has to be a directory");
          }
 
          return ! merge_dirs(argv[1], argv[2], argv[3]);
